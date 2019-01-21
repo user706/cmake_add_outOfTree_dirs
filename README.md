@@ -1,18 +1,33 @@
-It is a MISTAKE to assume that the *main* CMakeLists.txt is always located in a toplevel directory, with all files BELOW that directory.
-This mistaken assuption leads to a severe "BUG" in "cmake for visual studio".
+Install msys2 https://www.msys2.org/
 
-Example: 
-Here the *main* CMakeList.txt is located here: [target_device/full_variant/CMakeLists.txt](target_device/full_variant/CMakeLists.txt)  
-And from there we call:
-```cmake
-add_subdirectory(../../common/utils    # code which is NOT in a subdirectory, but "out-of-tree"
-                 utils_binary_dir      # build dir
-                 ) 
+After installation:
+Open up MSYS2 MSYS shell (C:\msys64\msys2_shell.cmd)
+
+```bash
+# copy paste the following lines to get gcc
+pacman -S --needed mingw-w64-x86_64-gcc   \
+                   mingw-w64-i686-gcc     \
+                   make                   \
+				   cmake                  \
+                   mingw-w64-x86_64-ninja \
+                   mingw-w64-i686-ninja
+				   
 ```
 
-This means that we go to out-of-tree builds  such as [common/utils/CMakeLists.txt](common/utils/CMakeLists.txt)  
-which ARE NOT DISPLAYED PROPERLY in the new "cmake for visual studio".
+```bat
+setx PATH "%PATH%;C:\msys64\mingw32\bin;C:\msys64\mingw64\bin"              &:: this is for needed mingw dlls
 
-This is a bug. It must be possible for me to see all the code.  
-Thus: In the case where the *main* CMakeLists.txt pulls in stuff, which does not lie in a subdirectory BELOW the *main* CMakeLists.txt-directory, 
-we must still be able to see that code.
+rem Check like this:
+rundll32 sysdm.cpl,EditEnvironmentVariables
+````
+
+
+The open the project in Visual Studio 2017 with: File->Open->CMake
+
+go to: **target_device\full_variant\CMakeLists.txt** (there you'll also find a CMakeSettings.json)
+
+The the menu-item CMake often hangs in "Cancel Cache Generation".
+
+Right-clicking CMakeLists.txt does not show "Build"...
+
+Only on rare occasions... does it work.
