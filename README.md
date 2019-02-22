@@ -10,3 +10,5 @@ The output is stuck on this:
 1> CMake generation finished.
 1> CMake generation canceled.
 ```
+
+When trying to reproduce this issue, please clear `build` and `.vs` folders between tries.
