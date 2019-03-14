@@ -1,14 +1,10 @@
-On visual studio 2019 preview, when opening the toplevel CMakeLists.txt and quickly switching between 
-x86-Debug, x86-Release, x86-Debug, x86-Release, x86-Debug, x86-Release, ...
+Try this:
 
-I get hanging behaviour
+```cmake
+git clone https://github.com/user706/cmake_add_outOfTree_dirs.git
+cd cmake_add_outOfTree_dirs
+git checkout try_3
 
-The output is stuck on this:
-
-```
-1> CMake generation started.
-1> CMake generation finished.
-1> CMake generation canceled.
+# now call Visual studio on the toplevel CMakeLists.txt, i.e. on cmake_add_outOfTree_dirs/CMakeLists.txt
 ```
 
-When trying to reproduce this issue, please clear `build` and `.vs` folders between tries.
